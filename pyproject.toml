@@ -6,14 +6,33 @@ readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 requires-python = ">=3.14"
-dependencies = [
-    "gradio>=6.20.0",
+authors = [
+    { name = "Ron Edgecomb" },
 ]
+keywords = ["gradio", "theme", "dark-theme"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+    "gradio>=6.20,<7",
+]
+
+[project.urls]
+Homepage = "https://github.com/ronedgecomb/inkpaper"
+Repository = "https://github.com/ronedgecomb/inkpaper"
+Issues = "https://github.com/ronedgecomb/inkpaper/issues"
+Changelog = "https://github.com/ronedgecomb/inkpaper/blob/main/CHANGELOG.md"
 
 [dependency-groups]
 dev = [
+    "check-wheel-contents>=0.6,<1",
     "pytest>=8",
     "ruff>=0.15.22",
+    "twine>=6,<7",
 ]
 
 [build-system]

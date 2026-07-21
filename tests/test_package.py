@@ -1,11 +1,13 @@
 """Package-level surface tests."""
 
+from importlib.metadata import version
+
 import inkpaper
 from inkpaper.theme import Inkpaper
 
 
-def test_version() -> None:
-    assert inkpaper.__version__ == "0.1.0"
+def test_version_matches_installed_distribution() -> None:
+    assert inkpaper.__version__ == version("inkpaper")
 
 
 def test_public_surface() -> None:
