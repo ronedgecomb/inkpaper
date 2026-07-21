@@ -15,3 +15,11 @@ wheels/
 
 # Internal design docs and plans — never published
 docs/
+
+# Local credentials
+.env
+.env.*
+!.env.example
+.pypirc
+*.pem
+*.key
