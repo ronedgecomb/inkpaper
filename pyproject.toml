@@ -1,6 +1,6 @@
 [project]
 name = "inkpaper"
-version = "0.1.0"
+version = "0.1.1"
 description = "An always-dark Gradio theme with monospace type, ink-black surfaces, paper-white text, and slate accents."
 readme = "README.md"
 license = "MIT"
