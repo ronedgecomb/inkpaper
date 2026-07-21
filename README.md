@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/ronedgecomb/inkpaper/actions/workflows/ci.yml/badge.svg)](https://github.com/ronedgecomb/inkpaper/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/inkpaper)](https://pypi.org/project/inkpaper/)
-[![Python](https://img.shields.io/badge/python-3.14%2B-7288a7)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/python-3.10%2B-7288a7)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-7288a7)](LICENSE)
 
 An always-dark Gradio theme with monospace type, ink-black surfaces, paper-white text, and slate accents.
@@ -23,19 +23,7 @@ For local development, clone this repository and run `uv sync`.
 
 ## Compatibility
 
-Inkpaper supports Python 3.14 or newer and Gradio 6.20 through 6.x. Gradio 7 is intentionally excluded until the theme tokens and DOM-level CSS workarounds are reviewed against that major version.
-
-Hugging Face Spaces default to an older Python runtime. Put this metadata block at the top of the Space's `README.md`:
-
-```yaml
----
-title: Inkpaper App
-sdk: gradio
-sdk_version: "6.20.0"
-python_version: "3.14"
-app_file: app.py
----
-```
+Inkpaper supports Python 3.10 or newer and Gradio 6.20 through 6.x. Gradio 7 is intentionally excluded until the theme tokens and DOM-level CSS workarounds are reviewed against that major version.
 
 ## Usage
 
