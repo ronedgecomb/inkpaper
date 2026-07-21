@@ -58,16 +58,40 @@ button.stop:active:active:active {
 }
 
 /*
- * Prose links: paper text over a 1px paper-faint underline; text and
- * underline ease to slate together on hover. Scoped to Gradio's
- * markdown/prose containers so tabs, buttons, and footer anchors keep
- * their own treatment. The class is stacked because Gradio's
- * .gradio-container-<hash> .prose a rule re-declares the
- * text-decoration shorthand (resetting color and thickness) and must
- * be out-specified without depending on the hash.
+ * Prose body text rests paper-mut; bright paper is reserved for
+ * headings and inline links. Gradio paints every prose descendant
+ * paper directly (.gradio-container-<hash> .prose * { color:
+ * var(--body-text-color) }), so the mute must land on descendants
+ * too, then headings and links win it back below. Chatbot messages
+ * reuse the .prose/.md container but carry a .chatbot class; they
+ * keep the body color. Stacked classes out-specify Gradio's hashed
+ * rules without depending on the hash.
  */
-.prose.prose.prose a,
-.md.md.md a {
+.prose.prose.prose:not(.chatbot) *,
+.md.md.md:not(.chatbot) * {
+  color: #8a8a8a;
+}
+
+.prose.prose.prose:not(.chatbot) :is(h1, h2, h3, h4, h5, h6),
+.prose.prose.prose:not(.chatbot) :is(h1, h2, h3, h4, h5, h6) *,
+.md.md.md:not(.chatbot) :is(h1, h2, h3, h4, h5, h6),
+.md.md.md:not(.chatbot) :is(h1, h2, h3, h4, h5, h6) * {
+  color: #eeeeee;
+}
+
+/*
+ * Prose links: paper text (deliberately brighter than the muted prose
+ * around them) over a 1px paper-faint underline; text and underline
+ * ease to slate together on hover. Scoped to Gradio's markdown/prose
+ * containers so tabs, buttons, and footer anchors keep their own
+ * treatment. The class is stacked because Gradio's
+ * .gradio-container-<hash> .prose a rule re-declares the
+ * text-decoration shorthand (resetting color and thickness), and the
+ * prose mute above must be out-specified for the resting color.
+ */
+.prose.prose.prose.prose a,
+.md.md.md.md a {
+  color: #eeeeee;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-decoration-color: #666666;
@@ -75,8 +99,8 @@ button.stop:active:active:active {
   text-decoration-skip-ink: auto;
 }
 
-.prose.prose.prose a:hover,
-.md.md.md a:hover {
+.prose.prose.prose.prose a:hover,
+.md.md.md.md a:hover {
   color: #7288a7;
   text-decoration-color: #7288a7;
 }
