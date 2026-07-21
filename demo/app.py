@@ -19,7 +19,7 @@ def greet(name: str, intensity: int) -> str:
     return "Hello " + ", ".join(["there"] * max(intensity, 1)) + f", {name}."
 
 
-def slow_count(steps: float, progress=gr.Progress()) -> str:
+def slow_count(steps: float, progress=gr.Progress()) -> str:  # noqa: B008 — Gradio injects the tracker via this default
     total = int(steps)
     for _ in progress.tqdm(range(total)):
         time.sleep(0.4)
@@ -74,14 +74,13 @@ with gr.Blocks(title="Inkpaper demo") as demo:
             label="Versions",
         )
 
-    with gr.Tab("Prose"):
-        with gr.Accordion("About this theme", open=True):
-            gr.Markdown(
-                "Body text is 16px mono on ink. Metadata sits at 14px, "
-                "labels at 12px. Links like "
-                "[this one](https://ronedgecomb.site) rest paper and "
-                "ease to slate on hover — slate always means interactive."
-            )
+    with gr.Tab("Prose"), gr.Accordion("About this theme", open=True):
+        gr.Markdown(
+            "Body text is 16px mono on ink. Metadata sits at 14px, "
+            "labels at 12px. Links like "
+            "[this one](https://ronedgecomb.site) rest paper and "
+            "ease to slate on hover — slate always means interactive."
+        )
 
 if __name__ == "__main__":
     inkpaper.launch(demo)
