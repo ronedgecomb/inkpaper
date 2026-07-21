@@ -23,7 +23,7 @@ For local development, clone this repository and run `uv sync`.
 
 ## Compatibility
 
-Inkpaper supports Python 3.10 or newer and Gradio 6.20 through 6.x. Gradio 7 is intentionally excluded until the theme tokens and DOM-level CSS workarounds are reviewed against that major version.
+Inkpaper supports Python 3.10 or newer and Gradio 6.20 through 6.x. The dependency is capped below the next major version: when Gradio 7 arrives, the theme tokens and DOM-level CSS workarounds must be reviewed against it before the cap is lifted.
 
 ## Usage
 
