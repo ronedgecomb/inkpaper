@@ -17,6 +17,9 @@ parameters, not ``gr.Blocks()`` parameters.
 """
 
 from importlib.metadata import PackageNotFoundError, version
+from typing import Any
+
+import gradio as gr
 
 from inkpaper.theme import CSS, Inkpaper
 
@@ -25,6 +28,8 @@ try:
 except PackageNotFoundError:  # source tree without an installed distribution
     __version__ = "0.0.0"
 
+# A ready-made shared instance. Construct Inkpaper() when an app needs an
+# independently mutable theme object.
 THEME = Inkpaper()
 
 # Pin the app to dark mode. Gradio reads the __theme URL parameter at
@@ -43,7 +48,7 @@ DARK_MODE_JS = """
 """
 
 
-def launch(blocks, **kwargs):
+def launch(blocks: gr.Blocks, **kwargs: Any) -> tuple[Any, str, str]:
     """Launch ``blocks`` with the Inkpaper theme applied.
 
     Injects two defaults, each overridable by passing the kwarg
@@ -51,6 +56,9 @@ def launch(blocks, **kwargs):
     mode). All other keyword arguments pass straight through to
     ``Blocks.launch``. A caller-supplied ``css`` loads after the
     theme's own CSS, so it wins the cascade.
+
+    ``THEME`` is shared. Construct ``Inkpaper()`` and pass it as
+    ``theme=`` when the caller intends to mutate a theme instance.
     """
     kwargs.setdefault("theme", THEME)
     kwargs.setdefault("js", DARK_MODE_JS)

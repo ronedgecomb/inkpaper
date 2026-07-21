@@ -14,13 +14,26 @@ import gradio as gr
 
 import inkpaper
 
+VERSION_ROWS = [
+    ["inkpaper", inkpaper.__version__],
+    ["gradio", gr.__version__],
+]
+
+
+def normalize_steps(steps: float | None) -> int:
+    """Convert a clearable Gradio number to a non-negative whole count."""
+    return max(int(steps or 0), 0)
+
 
 def greet(name: str, intensity: int) -> str:
     return "Hello " + ", ".join(["there"] * max(intensity, 1)) + f", {name}."
 
 
-def slow_count(steps: float, progress=gr.Progress()) -> str:  # noqa: B008 — Gradio injects the tracker via this default
-    total = int(steps)
+def slow_count(
+    steps: float | None,
+    progress=gr.Progress(),  # noqa: B008 — Gradio injects this tracker
+) -> str:
+    total = normalize_steps(steps)
     for _ in progress.tqdm(range(total)):
         time.sleep(0.4)
     return f"Counted to {total}."
@@ -56,7 +69,7 @@ with gr.Blocks(title="Inkpaper demo") as demo:
         clear_btn.click(lambda: "", outputs=greeting)
 
     with gr.Tab("Long job"):
-        steps = gr.Number(label="Steps", value=8)
+        steps = gr.Number(label="Steps", value=8, minimum=0, precision=0)
         outcome = gr.Textbox(label="Outcome", interactive=False)
         with gr.Row():
             start = gr.Button("Start", variant="primary")
@@ -69,7 +82,7 @@ with gr.Blocks(title="Inkpaper demo") as demo:
 
     with gr.Tab("Data"):
         gr.Dataframe(
-            value=[["inkpaper", "0.1.0"], ["gradio", "6.x"]],
+            value=VERSION_ROWS,
             headers=["package", "version"],
             label="Versions",
         )
