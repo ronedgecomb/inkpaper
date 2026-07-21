@@ -44,6 +44,44 @@ select:focus-visible {
 }
 
 /*
+ * Stop-variant buttons: Gradio 6 wires the cancel hover variables onto
+ * the stop button's background and border but never onto its text, so
+ * the label would sit paper-mut while the border eased to slate. Carry
+ * text and border together, hover and pressed alike. Stacked
+ * pseudo-classes out-specify Gradio's .stop.svelte-<hash> rules
+ * without depending on the hash.
+ */
+button.stop:hover:hover:hover,
+button.stop:active:active:active {
+  color: var(--button-cancel-text-color-hover);
+  border-color: var(--button-cancel-border-color-hover);
+}
+
+/*
+ * Prose links: paper text over a 1px paper-faint underline; text and
+ * underline ease to slate together on hover. Scoped to Gradio's
+ * markdown/prose containers so tabs, buttons, and footer anchors keep
+ * their own treatment. The class is stacked because Gradio's
+ * .gradio-container-<hash> .prose a rule re-declares the
+ * text-decoration shorthand (resetting color and thickness) and must
+ * be out-specified without depending on the hash.
+ */
+.prose.prose.prose a,
+.md.md.md a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: #666666;
+  text-underline-offset: 2px;
+  text-decoration-skip-ink: auto;
+}
+
+.prose.prose.prose a:hover,
+.md.md.md a:hover {
+  color: #7288a7;
+  text-decoration-color: #7288a7;
+}
+
+/*
  * Keyboard focus: a 1px slate outline held 3px off the element.
  * Text fields need the boosted selectors: Gradio's component CSS pins
  * `outline: none !important` on inputs and textareas at up to
