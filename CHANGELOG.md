@@ -2,6 +2,12 @@
 
 All notable changes to Inkpaper are documented here.
 
+## [0.1.1] - 2026-07-21
+
+### Changed
+
+- Widened the supported Python range from 3.14-only to 3.10 or newer, tested on 3.10 through 3.14.
+
 ## [0.1.0] - 2026-07-21
 
 ### Added
