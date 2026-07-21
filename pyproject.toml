@@ -1,0 +1,20 @@
+[project]
+name = "inkpaper"
+version = "0.1.0"
+description = "A Gradio theme for ronedgecomb.site projects — ink, paper, and slate."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.14"
+dependencies = [
+    "gradio>=6.20.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]
+
+[build-system]
+requires = ["uv_build>=0.11,<0.12"]
+build-backend = "uv_build"
