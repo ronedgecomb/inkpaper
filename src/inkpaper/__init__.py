@@ -37,14 +37,14 @@ THEME = Inkpaper()
 # identical light and dark variables, so this only affects the handful
 # of Gradio styles keyed off the mode class rather than theme variables.
 DARK_MODE_JS = """
-() => {
+(() => {
   const url = new URL(window.location.href);
   if (url.searchParams.get('__theme') !== 'dark') {
     url.searchParams.set('__theme', 'dark');
-    window.location.replace(url.href);
+    window.history.replaceState(null, '', url.href);
   }
   document.body.classList.add('dark');
-}
+})();
 """
 
 
