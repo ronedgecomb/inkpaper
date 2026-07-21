@@ -7,6 +7,8 @@
 
 An always-dark Gradio theme with monospace type, ink-black surfaces, paper-white text, and slate accents.
 
+![The Inkpaper demo app: the Inputs tab of a dark Gradio page with monospace text and slate accents](https://raw.githubusercontent.com/ronedgecomb/inkpaper/main/.github/demo.png)
+
 ## Install
 
 ```bash
