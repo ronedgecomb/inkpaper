@@ -43,8 +43,18 @@ select:focus-visible {
   transition-duration: 200ms;
 }
 
-/* Keyboard focus: a 1px slate outline held 3px off the element. */
-*:focus-visible {
+/*
+ * Keyboard focus: a 1px slate outline held 3px off the element.
+ * Text fields need the boosted selectors: Gradio's component CSS pins
+ * `outline: none !important` on inputs and textareas at up to
+ * class-class-attribute specificity, and between two !important
+ * declarations the more specific selector wins. Repeating the
+ * pseudo-class raises specificity without depending on Gradio's DOM.
+ */
+*:focus-visible,
+input:focus-visible:focus-visible:focus-visible:focus-visible,
+textarea:focus-visible:focus-visible:focus-visible:focus-visible,
+select:focus-visible:focus-visible:focus-visible:focus-visible {
   outline: 1px solid #7288a7 !important;
   outline-offset: 3px;
 }
