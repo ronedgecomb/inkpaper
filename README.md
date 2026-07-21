@@ -9,19 +9,17 @@ An always-dark Gradio theme with monospace type, ink-black surfaces, paper-white
 
 ## Install
 
-After the first PyPI release:
-
 ```bash
 pip install inkpaper
 ```
 
-From a public GitHub release tag:
+Or pin a GitHub release tag:
 
 ```text
 inkpaper @ git+https://github.com/ronedgecomb/inkpaper.git@v0.1.0
 ```
 
-Before the first release, clone this repository and run `uv sync` for local development.
+For local development, clone this repository and run `uv sync`.
 
 ## Compatibility
 
