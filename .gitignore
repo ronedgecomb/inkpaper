@@ -11,6 +11,7 @@ wheels/
 
 # Local agent scratch
 .superpowers/
+.worktrees/
 
 # Internal design docs and plans — never published
 docs/
