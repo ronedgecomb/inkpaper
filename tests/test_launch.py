@@ -24,13 +24,13 @@ def test_launch_injects_theme_and_dark_js() -> None:
     assert "css" not in fake.kwargs  # the theme itself carries the CSS
 
 
-def test_dark_mode_script_is_immediately_invoked() -> None:
+def test_dark_mode_script_has_immediately_invoked_structure() -> None:
     script = inkpaper.DARK_MODE_JS.strip()
     assert script.startswith("(() => {")
     assert script.endswith("})();")
 
 
-def test_dark_mode_script_updates_url_without_reloading() -> None:
+def test_dark_mode_script_uses_non_reloading_history_update() -> None:
     assert "window.history.replaceState" in inkpaper.DARK_MODE_JS
     assert "window.location.replace" not in inkpaper.DARK_MODE_JS
 

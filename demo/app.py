@@ -86,6 +86,12 @@ with gr.Blocks(title="Inkpaper demo") as demo:
             headers=["package", "version"],
             label="Versions",
         )
+        gr.Code(
+            value="import inkpaper\n\ninkpaper.launch(demo)\n",
+            language="python",
+            label="Code",
+            interactive=False,
+        )
 
     with gr.Tab("Prose"), gr.Accordion("About this theme", open=True):
         gr.Markdown(

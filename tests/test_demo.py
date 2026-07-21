@@ -60,3 +60,12 @@ def test_demo_version_rows_use_runtime_metadata() -> None:
         ["inkpaper", inkpaper.__version__],
         ["gradio", gr.__version__],
     ] == module.VERSION_ROWS
+
+
+def test_demo_includes_a_read_only_code_surface() -> None:
+    demo = _load_demo().demo
+    code_blocks = [
+        block for block in demo.blocks.values() if isinstance(block, gr.Code)
+    ]
+    assert len(code_blocks) == 1
+    assert code_blocks[0].interactive is False
