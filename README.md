@@ -34,6 +34,8 @@ In a Space's `requirements.txt` (or any project):
 inkpaper @ git+<public-repo-url>@v0.1.0
 ```
 
+Requires Python >= 3.14 — configure your Space's runtime accordingly.
+
 Once published to PyPI: `inkpaper==0.1.0`.
 
 ## Tokens

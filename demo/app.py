@@ -21,7 +21,7 @@ def greet(name: str, intensity: int) -> str:
 
 def slow_count(steps: float, progress=gr.Progress()) -> str:
     total = int(steps)
-    for step in progress.tqdm(range(total)):
+    for _ in progress.tqdm(range(total)):
         time.sleep(0.4)
     return f"Counted to {total}."
 
