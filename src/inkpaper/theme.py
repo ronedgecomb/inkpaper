@@ -76,3 +76,121 @@ class Inkpaper(themes.Base):
             font_mono=MONO_STACK,
         )
         self.name = "inkpaper"
+        self.set(
+            # Body and surfaces: flat ink, paper text.
+            body_background_fill="*neutral_950",
+            body_text_color="*neutral_50",
+            body_text_color_subdued="*neutral_300",
+            background_fill_primary="*neutral_950",
+            background_fill_secondary="*neutral_900",
+            border_color_primary="*neutral_700",
+            border_color_accent="*primary_500",
+            border_color_accent_subdued="*primary_700",
+            color_accent="*primary_500",
+            color_accent_soft="*primary_950",
+            # Blocks and panels: flat, hairline-bordered, unshadowed.
+            block_background_fill="*neutral_950",
+            block_border_color="*neutral_700",
+            block_label_background_fill="*neutral_950",
+            block_label_text_color="*neutral_300",
+            block_title_text_color="*neutral_50",
+            block_info_text_color="*neutral_500",
+            block_shadow="none",
+            panel_background_fill="*neutral_950",
+            panel_border_color="*neutral_700",
+            shadow_drop="none",
+            shadow_drop_lg="none",
+            shadow_inset="none",
+            accordion_text_color="*neutral_50",
+            # Buttons: outlined and flat. Primary announces itself in
+            # slate; secondary rests as chrome; cancel rests as paper-mut.
+            # All converge on slate at hover — slate means interactive.
+            button_border_width="1px",
+            button_primary_background_fill="transparent",
+            button_primary_background_fill_hover="*primary_500",
+            button_primary_border_color="*primary_500",
+            button_primary_text_color="*primary_500",
+            button_primary_text_color_hover="*neutral_950",
+            button_secondary_background_fill="transparent",
+            button_secondary_background_fill_hover="transparent",
+            button_secondary_border_color="*neutral_700",
+            button_secondary_border_color_hover="*primary_500",
+            button_secondary_text_color="*neutral_300",
+            button_secondary_text_color_hover="*primary_500",
+            button_cancel_background_fill="transparent",
+            button_cancel_background_fill_hover="transparent",
+            button_cancel_border_color="*neutral_300",
+            button_cancel_border_color_hover="*primary_500",
+            button_cancel_text_color="*neutral_300",
+            button_cancel_text_color_hover="*primary_500",
+            # Inputs: raised ink-2 wells, slate only on interaction.
+            input_background_fill="*neutral_900",
+            input_background_fill_focus="*neutral_900",
+            input_background_fill_hover="*neutral_900",
+            input_border_color="*neutral_700",
+            input_border_color_hover="*primary_500",
+            input_border_color_focus="*primary_500",
+            input_placeholder_color="*neutral_500",
+            input_shadow="none",
+            input_shadow_focus="none",
+            # Checkboxes and radios.
+            checkbox_background_color="*neutral_900",
+            checkbox_background_color_hover="*neutral_900",
+            checkbox_background_color_focus="*neutral_900",
+            checkbox_background_color_selected="*primary_500",
+            checkbox_border_color="*neutral_700",
+            checkbox_border_color_hover="*primary_500",
+            checkbox_border_color_focus="*primary_500",
+            checkbox_border_color_selected="*primary_500",
+            checkbox_label_background_fill="transparent",
+            checkbox_label_background_fill_hover="transparent",
+            checkbox_label_background_fill_selected="transparent",
+            checkbox_label_border_color="*neutral_700",
+            checkbox_label_border_color_hover="*primary_500",
+            checkbox_label_border_color_selected="*primary_500",
+            checkbox_label_text_color="*neutral_300",
+            checkbox_label_text_color_selected="*neutral_50",
+            # Sliders, loaders, links, misc accents.
+            slider_color="*primary_500",
+            loader_color="*primary_500",
+            link_text_color="*neutral_50",
+            link_text_color_hover="*primary_500",
+            link_text_color_active="*primary_500",
+            link_text_color_visited="*neutral_50",
+            stat_background_fill="*primary_500",
+            # Tables and code.
+            table_border_color="*neutral_700",
+            table_even_background_fill="*neutral_950",
+            table_odd_background_fill="*neutral_900",
+            table_row_focus="*primary_950",
+            table_text_color="*neutral_50",
+            code_background_fill="*neutral_900",
+            # Errors: the palette has no red; errors speak through
+            # contrast (paper text, paper-mut border on ink-2).
+            error_background_fill="*neutral_900",
+            error_border_color="*neutral_300",
+            error_text_color="*neutral_50",
+            error_icon_color="*neutral_300",
+            # Type roles: 16px body, 14px meta, 12px labels, mono weights.
+            body_text_size="*text_lg",
+            block_title_text_size="*text_md",
+            block_label_text_size="*text_sm",
+            block_info_text_size="*text_sm",
+            section_header_text_size="*text_md",
+            block_title_text_weight="400",
+            prose_header_text_weight="600",
+        )
+        _mirror_light_to_dark(self)
+
+
+def _mirror_light_to_dark(theme: themes.Base) -> None:
+    """Give every ``*_dark`` variable its light counterpart's value.
+
+    The site has exactly one look, so the theme must render identically
+    whichever mode Gradio believes it is in.
+    """
+    for name in list(vars(theme)):
+        if name.endswith("_dark"):
+            light = name.removesuffix("_dark")
+            if hasattr(theme, light):
+                setattr(theme, name, getattr(theme, light))

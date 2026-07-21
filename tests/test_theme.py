@@ -29,3 +29,37 @@ def test_theme_constructs_with_mono_fonts_and_no_radius() -> None:
     assert theme.text_lg == "16px"
     assert theme.text_md == "14px"
     assert theme.text_sm == "12px"
+
+
+def test_role_mapping_follows_site_rules() -> None:
+    theme = Inkpaper()
+    # Surfaces are flat ink; chrome is hairline.
+    assert theme.body_background_fill == "*neutral_950"
+    assert theme.body_text_color == "*neutral_50"
+    assert theme.block_background_fill == "*neutral_950"
+    assert theme.block_border_color == "*neutral_700"
+    assert theme.block_shadow == "none"
+    # Slate marks interactive elements.
+    assert theme.slider_color == "*primary_500"
+    assert theme.loader_color == "*primary_500"
+    assert theme.input_border_color_focus == "*primary_500"
+    # Stop/cancel: neutral paper-mut border fading to slate, no invented red.
+    assert theme.button_cancel_border_color == "*neutral_300"
+    assert theme.button_cancel_border_color_hover == "*primary_500"
+    assert theme.button_cancel_text_color == "*neutral_300"
+
+
+def test_every_dark_variable_mirrors_its_light_twin() -> None:
+    theme = Inkpaper()
+    pairs = [
+        (name, name.removesuffix("_dark"))
+        for name in vars(theme)
+        if name.endswith("_dark")
+    ]
+    assert len(pairs) > 50, "expected Gradio to expose many dark variables"
+    mismatched = [
+        dark
+        for dark, light in pairs
+        if hasattr(theme, light) and getattr(theme, dark) != getattr(theme, light)
+    ]
+    assert mismatched == []
