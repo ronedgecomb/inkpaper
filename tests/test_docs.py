@@ -41,6 +41,34 @@ def test_security_and_release_routes_are_exact() -> None:
     assert "Yank" in releasing
 
 
+def test_solo_release_approval_cannot_deadlock() -> None:
+    releasing = _read("RELEASING.md")
+    assert "leave self-review allowed" in releasing
+    assert "genuinely independent reviewer" in releasing
+    assert "prevent self-bypass where the account settings support it" not in releasing
+
+
+def test_release_command_requires_a_manual_gate_summary() -> None:
+    releasing = _read("RELEASING.md")
+    prompt = (
+        '$visualGateSummary = Read-Host "Summarize the completed manual visual gate"'
+    )
+    assert prompt in releasing
+    guard = """if ([string]::IsNullOrWhiteSpace($visualGateSummary)) {
+    throw "A manual visual-gate summary is required."
+}"""
+    assert guard in releasing
+    assert "--notes $visualGateSummary --generate-notes" in releasing
+
+
+def test_yank_guidance_matches_pypi_and_preserves_versions() -> None:
+    releasing = _read("RELEASING.md")
+    assert "select **Yank**" in releasing
+    assert "select **Yank release**" not in releasing
+    assert "Uploaded files and filenames cannot be overwritten or reused" in releasing
+    assert "never reuse a published version" in releasing
+
+
 def test_local_credentials_are_ignored() -> None:
     ignore = _read(".gitignore").splitlines()
     assert ".env" in ignore

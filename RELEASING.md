@@ -9,7 +9,7 @@ Complete these steps only after the publication-ready repository is reviewed:
 1. Create the public GitHub repository `ronedgecomb/inkpaper` and push `main`.
 2. Protect `main`: require the CI checks, require pull requests, and block force-pushes and branch deletion. Configure the rule so the single maintainer can still merge reviewed, passing work.
 3. Enable secret scanning, push protection, and private vulnerability reporting.
-4. Create a GitHub environment named `pypi`, add Ron Edgecomb as its required reviewer, and prevent self-bypass where the account settings support it.
+4. Create a protected GitHub environment named `pypi`. For the default single-maintainer setup, add Ron Edgecomb as its required reviewer and leave self-review allowed so Ron can approve a release workflow that he triggered. If prevent-self-review is enabled instead, configure a genuinely independent reviewer who can approve Ron-triggered deployments.
 5. Confirm `https://pypi.org/project/inkpaper/` is still unclaimed.
 6. In PyPI, create a pending publisher for owner `ronedgecomb`, repository `inkpaper`, workflow `release.yml`, and environment `pypi`.
 
@@ -69,7 +69,7 @@ Run `uv run python demo/app.py`, then inspect desktop and narrow layouts before 
 - chat messages, tables, code surfaces, prose hierarchy, and links; and
 - keyboard-only navigation with visible slate outlines.
 
-Record the result in the release notes. Stop the demo with Ctrl+C.
+Prepare a non-empty summary of the result for the release notes. The publish command below requires it. Stop the demo with Ctrl+C.
 
 ## Publish
 
@@ -77,10 +77,14 @@ Merge the reviewed version and changelog changes through protected `main`. Then 
 
 ```powershell
 $releaseVersion = uv version --short
-gh release create "v$releaseVersion" --target main --title "inkpaper $releaseVersion" --generate-notes
+$visualGateSummary = Read-Host "Summarize the completed manual visual gate"
+if ([string]::IsNullOrWhiteSpace($visualGateSummary)) {
+    throw "A manual visual-gate summary is required."
+}
+gh release create "v$releaseVersion" --target main --title "inkpaper $releaseVersion" --notes $visualGateSummary --generate-notes
 ```
 
-Publishing the GitHub Release triggers CI again. The release tag must equal `v` plus the project version. The workflow builds once, validates and hashes the artifacts, waits for approval on the `pypi` environment, publishes those exact files, and uploads attestations.
+`--notes` prepends the manual visual-gate summary to the generated release notes. Publishing the GitHub Release triggers CI again. The release tag must equal `v` plus the project version. The workflow builds once, validates and hashes the artifacts, waits for approval on the `pypi` environment, publishes those exact files, and uploads attestations.
 
 ## Verify publication
 
@@ -98,4 +102,4 @@ Expected output begins with the release version and ends with `Inkpaper True`.
 
 ## Yank a broken release
 
-PyPI files and version numbers are immutable: never overwrite or reuse a published version. If a release is unsafe or unusable, open the release under the PyPI project's Manage page, choose **Options**, select **Yank release**, and record a concise reason. Fix the defect, increment the version, repeat every gate, and publish a new GitHub Release.
+Uploaded files and filenames cannot be overwritten or reused, and Inkpaper's project policy is to never reuse a published version. If a release is unsafe or unusable, open the release under the PyPI project's Manage page, choose **Options**, select **Yank**, and record a concise reason. Fix the defect, increment the version, repeat every gate, and publish a new GitHub Release.
