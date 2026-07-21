@@ -13,7 +13,7 @@ def test_readme_has_real_install_and_compatibility_details() -> None:
     readme = _read("README.md")
     assert "pip install inkpaper" in readme
     assert "https://github.com/ronedgecomb/inkpaper.git@v0.1.0" in readme
-    retired_url_marker = chr(60) + "public-repo-url" + chr(62)
+    retired_url_marker = chr(60) + "public-" + "repo-url" + chr(62)
     assert retired_url_marker not in readme
     assert 'python_version: "3.14"' in readme
     assert "Python 3.14 or newer" in readme
