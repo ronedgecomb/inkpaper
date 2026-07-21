@@ -2,6 +2,8 @@
 
 All notable changes to Inkpaper are documented here.
 
+## [Unreleased]
+
 ## [0.1.1] - 2026-07-21
 
 ### Changed
