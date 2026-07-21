@@ -31,6 +31,7 @@ Changelog = "https://github.com/ronedgecomb/inkpaper/blob/main/CHANGELOG.md"
 dev = [
     "check-wheel-contents>=0.6,<1",
     "pytest>=8",
+    "pyyaml>=6,<7",
     "ruff>=0.15.22",
     "twine>=6,<7",
 ]

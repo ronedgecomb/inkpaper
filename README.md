@@ -107,7 +107,7 @@ uv run ruff format .
 uv run python demo/app.py
 ```
 
-Release preparation, including the manual visual gate and external Trusted Publishing setup, is documented in [RELEASING.md](RELEASING.md). Changes are recorded in [CHANGELOG.md](CHANGELOG.md), and security reports follow [SECURITY.md](SECURITY.md).
+Contribution setup and review expectations are in [CONTRIBUTING.md](CONTRIBUTING.md). Release preparation, including the manual visual gate and external Trusted Publishing setup, is documented in [RELEASING.md](RELEASING.md). Changes are recorded in [CHANGELOG.md](CHANGELOG.md), and security reports follow [SECURITY.md](SECURITY.md).
 
 ## License
 

@@ -23,11 +23,30 @@ def test_readme_has_real_install_and_compatibility_details() -> None:
 
 
 def test_public_maintenance_files_exist_without_draft_markers() -> None:
-    for name in ("CHANGELOG.md", "SECURITY.md", "RELEASING.md"):
+    for name in ("CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md", "RELEASING.md"):
         text = _read(name)
         assert text.strip()
         for marker in ("T" + "BD", "TO" + "DO"):
             assert marker not in text
+
+
+def test_contributing_documents_the_public_change_process() -> None:
+    readme = _read("README.md")
+    contributing = _read("CONTRIBUTING.md")
+    assert "[CONTRIBUTING.md](CONTRIBUTING.md)" in readme
+    for requirement in (
+        "Python 3.14",
+        "uv sync",
+        "uv run ruff check .",
+        "uv run ruff format --check .",
+        "uv run pytest",
+        "Gradio 6.20",
+        "Gradio 7",
+        "SECURITY.md",
+        "manual visual",
+        "maintainers",
+    ):
+        assert requirement in contributing
 
 
 def test_security_and_release_routes_are_exact() -> None:

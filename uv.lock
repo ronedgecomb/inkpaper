@@ -497,6 +497,7 @@ dependencies = [
 dev = [
     { name = "check-wheel-contents" },
     { name = "pytest" },
+    { name = "pyyaml" },
     { name = "ruff" },
     { name = "twine" },
 ]
@@ -508,6 +509,7 @@ requires-dist = [{ name = "gradio", specifier = ">=6.20,<7" }]
 dev = [
     { name = "check-wheel-contents", specifier = ">=0.6,<1" },
     { name = "pytest", specifier = ">=8" },
+    { name = "pyyaml", specifier = ">=6,<7" },
     { name = "ruff", specifier = ">=0.15.22" },
     { name = "twine", specifier = ">=6,<7" },
 ]

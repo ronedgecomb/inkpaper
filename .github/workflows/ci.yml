@@ -26,6 +26,8 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Install uv and Python
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
@@ -38,6 +40,8 @@ jobs:
         run: uv run --locked ruff check .
       - name: Check formatting
         run: uv run --locked ruff format --check .
+      - name: Scan workflow security
+        run: uvx --from zizmor==1.27.0 zizmor --offline --strict-collection --min-severity low .github/workflows
       - name: Test locked environment
         run: uv run --locked pytest -q
 
@@ -55,6 +59,8 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Install uv and Python
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
@@ -71,6 +77,8 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Install uv and Python
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
@@ -81,7 +89,9 @@ jobs:
         run: uv sync --locked
       - name: Validate release identity
         if: inputs.release_tag != ''
-        run: uv run --locked python scripts/check_release.py "${{ inputs.release_tag }}"
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: uv run --locked python scripts/check_release.py "$RELEASE_TAG"
       - name: Build distributions
         run: uv build --out-dir dist
       - name: Validate metadata
