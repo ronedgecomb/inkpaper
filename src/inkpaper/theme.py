@@ -1,8 +1,8 @@
-"""The Inkpaper theme: ronedgecomb.site's identity as a Gradio theme.
+"""The Inkpaper theme. Always-dark surfaces, monospace type, slate accents.
 
-Anchor values are the site's design tokens. Gradio requires full
+Anchor values are the theme's core palette. Gradio requires full
 c50-c950 ramps, so stops between anchors are interpolated; every
-interpolated stop is marked as such and is not a site token.
+interpolated stop is marked as such and is not an anchor value.
 """
 
 from __future__ import annotations
@@ -108,7 +108,7 @@ class Inkpaper(themes.Base):
             accordion_text_color="*neutral_50",
             # Buttons: outlined and flat. Primary announces itself in
             # slate; secondary rests as chrome; cancel rests as paper-mut.
-            # All converge on slate at hover — slate means interactive.
+            # All converge on slate at hover, because slate means interactive.
             button_border_width="1px",
             button_primary_background_fill="transparent",
             button_primary_background_fill_hover="*primary_500",

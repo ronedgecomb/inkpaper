@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/python-3.14%2B-7288a7)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-7288a7)](LICENSE)
 
-An always-dark Gradio theme matching [ronedgecomb.site](https://ronedgecomb.site): ink surfaces, paper text, slate accents, and mono type.
+An always-dark Gradio theme with monospace type, ink-black surfaces, paper-white text, and slate accents.
 
 ## Install
 

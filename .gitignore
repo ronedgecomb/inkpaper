@@ -13,7 +13,7 @@ wheels/
 .superpowers/
 .worktrees/
 
-# Internal design docs and plans — never published
+# Internal design docs and plans, never published
 docs/
 
 # Local credentials

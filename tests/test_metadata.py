@@ -20,7 +20,7 @@ def test_declared_runtime_compatibility() -> None:
 def test_pypi_identity_and_discovery_metadata() -> None:
     project = _project()
     assert project["authors"] == [{"name": "Ron Edgecomb"}]
-    assert project["keywords"] == ["gradio", "theme", "dark-theme"]
+    assert project["keywords"] == ["gradio", "theme", "dark-theme", "monospace"]
     assert project["license"] == "MIT"
     assert not any(value.startswith("License ::") for value in project["classifiers"])
     assert {

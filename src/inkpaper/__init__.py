@@ -1,4 +1,4 @@
-"""Inkpaper: a Gradio theme matching ronedgecomb.site.
+"""Inkpaper: an always-dark Gradio theme with monospace type.
 
 Usage::
 

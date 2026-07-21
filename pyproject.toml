@@ -1,7 +1,7 @@
 [project]
 name = "inkpaper"
 version = "0.1.0"
-description = "A Gradio theme for ronedgecomb.site projects — ink, paper, and slate."
+description = "An always-dark Gradio theme with monospace type, ink-black surfaces, paper-white text, and slate accents."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
@@ -9,7 +9,7 @@ requires-python = ">=3.14"
 authors = [
     { name = "Ron Edgecomb" },
 ]
-keywords = ["gradio", "theme", "dark-theme"]
+keywords = ["gradio", "theme", "dark-theme", "monospace"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",

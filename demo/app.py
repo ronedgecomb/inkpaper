@@ -31,7 +31,7 @@ def greet(name: str, intensity: int) -> str:
 
 def slow_count(
     steps: float | None,
-    progress=gr.Progress(),  # noqa: B008 — Gradio injects this tracker
+    progress=gr.Progress(),  # noqa: B008 (Gradio injects this tracker)
 ) -> str:
     total = normalize_steps(steps)
     for _ in progress.tqdm(range(total)):
@@ -46,7 +46,7 @@ def echo(message: str, history: list) -> str:
 with gr.Blocks(title="Inkpaper demo") as demo:
     gr.Markdown(
         "# Inkpaper\n"
-        "A Gradio theme matching [ronedgecomb.site](https://ronedgecomb.site). "
+        "An always-dark Gradio theme with monospace type. "
         "Ink surfaces, paper text, slate accents."
     )
 
@@ -97,8 +97,9 @@ with gr.Blocks(title="Inkpaper demo") as demo:
         gr.Markdown(
             "Body text is 16px mono on ink. Metadata sits at 14px, "
             "labels at 12px. Links like "
-            "[this one](https://ronedgecomb.site) rest paper and "
-            "ease to slate on hover — slate always means interactive."
+            "[this one](https://github.com/ronedgecomb/inkpaper) rest "
+            "paper and ease to slate on hover. Slate always means "
+            "interactive."
         )
 
 if __name__ == "__main__":
