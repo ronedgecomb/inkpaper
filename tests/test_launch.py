@@ -14,13 +14,13 @@ class FakeBlocks:
         return "launched"
 
 
-def test_launch_injects_theme_dark_js_and_footer() -> None:
+def test_launch_injects_theme_and_dark_js() -> None:
     fake = FakeBlocks()
     result = inkpaper.launch(fake)
     assert result == "launched"
     assert fake.kwargs["theme"] is inkpaper.THEME
     assert fake.kwargs["js"] == inkpaper.DARK_MODE_JS
-    assert fake.kwargs["footer_links"] == ["api", "gradio"]
+    assert "footer_links" not in fake.kwargs
     assert "css" not in fake.kwargs  # the theme itself carries the CSS
 
 

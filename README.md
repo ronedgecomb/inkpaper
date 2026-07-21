@@ -16,8 +16,8 @@ inkpaper.launch(demo)
 ```
 
 `inkpaper.launch(demo, **kwargs)` forwards every keyword argument to
-`Blocks.launch` and injects three overridable defaults: the theme, a
-dark-mode pin, and `footer_links=["api", "gradio"]`.
+`Blocks.launch` and injects two overridable defaults: the theme and a
+dark-mode pin.
 
 For full manual control, the pieces are importable — note that in
 Gradio 6 `theme=` belongs to `launch()`, not `gr.Blocks()`:

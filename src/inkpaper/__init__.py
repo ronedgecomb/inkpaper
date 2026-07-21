@@ -46,16 +46,14 @@ DARK_MODE_JS = """
 def launch(blocks, **kwargs):
     """Launch ``blocks`` with the Inkpaper theme applied.
 
-    Injects three defaults, each overridable by passing the kwarg
-    yourself: ``theme=THEME``, ``js=DARK_MODE_JS`` (forces dark mode),
-    and ``footer_links=["api", "gradio"]`` (drops the settings page,
-    which houses Gradio's theme switcher). All other keyword arguments
-    pass straight through to ``Blocks.launch``. A caller-supplied
-    ``css`` loads after the theme's own CSS, so it wins the cascade.
+    Injects two defaults, each overridable by passing the kwarg
+    yourself: ``theme=THEME`` and ``js=DARK_MODE_JS`` (forces dark
+    mode). All other keyword arguments pass straight through to
+    ``Blocks.launch``. A caller-supplied ``css`` loads after the
+    theme's own CSS, so it wins the cascade.
     """
     kwargs.setdefault("theme", THEME)
     kwargs.setdefault("js", DARK_MODE_JS)
-    kwargs.setdefault("footer_links", ["api", "gradio"])
     return blocks.launch(**kwargs)
 
 
