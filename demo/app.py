@@ -42,10 +42,14 @@ with gr.Blocks(title="Inkpaper demo") as demo:
             name = gr.Textbox(label="Name", placeholder="Type a name")
             intensity = gr.Slider(1, 10, step=1, label="Intensity")
         with gr.Row():
-            gr.Dropdown(["alpha", "beta", "gamma"], label="Dropdown")
-            gr.Radio(["one", "two", "three"], label="Radio")
-            gr.CheckboxGroup(["red herring", "real option"], label="Checkboxes")
-        gr.Number(label="Number", value=42)
+            gr.Dropdown(
+                ["alpha", "beta", "gamma"], label="Dropdown", interactive=True
+            )
+            gr.Radio(["one", "two", "three"], label="Radio", interactive=True)
+            gr.CheckboxGroup(
+                ["option a", "option b"], label="Checkboxes", interactive=True
+            )
+        gr.Number(label="Number", value=42, interactive=True)
         greeting = gr.Textbox(label="Greeting", interactive=False)
         with gr.Row():
             greet_btn = gr.Button("Greet", variant="primary")
