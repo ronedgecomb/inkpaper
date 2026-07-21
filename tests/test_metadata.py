@@ -1,7 +1,8 @@
 """Release-facing project metadata and compatibility policy."""
 
-import tomllib
 from pathlib import Path
+
+import tomllib
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -13,7 +14,7 @@ def _project() -> dict:
 
 def test_declared_runtime_compatibility() -> None:
     project = _project()
-    assert project["requires-python"] == ">=3.14"
+    assert project["requires-python"] == ">=3.10"
     assert project["dependencies"] == ["gradio>=6.20,<7"]
 
 
@@ -27,6 +28,10 @@ def test_pypi_identity_and_discovery_metadata() -> None:
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
         "Programming Language :: Python :: 3.14",
         "Operating System :: OS Independent",
     } <= set(project["classifiers"])
