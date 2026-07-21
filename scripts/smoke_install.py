@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import sys
 from importlib.metadata import version
+from importlib.resources import files
 
 import inkpaper
 
@@ -20,6 +21,8 @@ def verify(expected_version: str) -> None:
         )
     if not inkpaper.CSS.strip():
         raise RuntimeError("bundled CSS is empty")
+    if not (files("inkpaper") / "py.typed").is_file():
+        raise RuntimeError("py.typed marker is missing from the installed distribution")
     theme = inkpaper.Inkpaper()
     if theme.custom_css != inkpaper.CSS:
         raise RuntimeError("theme did not load the bundled CSS")

@@ -1,6 +1,7 @@
 """Package-level surface tests."""
 
 from importlib.metadata import version
+from importlib.resources import files
 from typing import Any, get_type_hints
 
 import gradio as gr
@@ -32,3 +33,7 @@ def test_launch_has_practical_public_annotations() -> None:
 
 def test_independent_theme_instances_do_not_alias_singleton() -> None:
     assert Inkpaper() is not inkpaper.THEME
+
+
+def test_py_typed_marker_is_installed() -> None:
+    assert (files("inkpaper") / "py.typed").is_file()

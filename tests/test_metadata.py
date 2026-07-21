@@ -38,6 +38,7 @@ def test_pypi_identity_and_discovery_metadata() -> None:
         "Programming Language :: Python :: 3.13",
         "Programming Language :: Python :: 3.14",
         "Operating System :: OS Independent",
+        "Typing :: Typed",
     } <= set(project["classifiers"])
 
 

@@ -4,6 +4,10 @@ All notable changes to Inkpaper are documented here.
 
 ## [Unreleased]
 
+### Added
+
+- `py.typed` marker (PEP 561) and the `Typing :: Typed` classifier, so downstream type checkers use the shipped annotations.
+
 ## [0.1.1] - 2026-07-21
 
 ### Changed
