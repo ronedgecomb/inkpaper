@@ -17,9 +17,7 @@ def _load_demo() -> gr.Blocks:
 
 def test_showcase_inputs_are_interactive() -> None:
     demo = _load_demo()
-    by_label = {
-        getattr(block, "label", None): block for block in demo.blocks.values()
-    }
+    by_label = {getattr(block, "label", None): block for block in demo.blocks.values()}
     for label in ("Dropdown", "Radio", "Checkboxes", "Number"):
         assert by_label[label].interactive is True, label
 

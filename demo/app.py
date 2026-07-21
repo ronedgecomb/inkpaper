@@ -42,9 +42,7 @@ with gr.Blocks(title="Inkpaper demo") as demo:
             name = gr.Textbox(label="Name", placeholder="Type a name")
             intensity = gr.Slider(1, 10, step=1, label="Intensity")
         with gr.Row():
-            gr.Dropdown(
-                ["alpha", "beta", "gamma"], label="Dropdown", interactive=True
-            )
+            gr.Dropdown(["alpha", "beta", "gamma"], label="Dropdown", interactive=True)
             gr.Radio(["one", "two", "three"], label="Radio", interactive=True)
             gr.CheckboxGroup(
                 ["option a", "option b"], label="Checkboxes", interactive=True
