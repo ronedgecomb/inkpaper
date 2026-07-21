@@ -7,6 +7,8 @@ interpolated stop is marked as such and is not a site token.
 
 from __future__ import annotations
 
+from importlib.resources import files
+
 import gradio.themes as themes
 from gradio.themes.utils import colors, sizes
 
@@ -60,6 +62,8 @@ TEXT_SIZES = sizes.Size(
     xl="18px",
     xxl="22px",
 )
+
+CSS = (files("inkpaper") / "inkpaper.css").read_text(encoding="utf-8")
 
 
 class Inkpaper(themes.Base):
@@ -181,6 +185,7 @@ class Inkpaper(themes.Base):
             prose_header_text_weight="600",
         )
         _mirror_light_to_dark(self)
+        self.custom_css = CSS
 
 
 def _mirror_light_to_dark(theme: themes.Base) -> None:

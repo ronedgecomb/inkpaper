@@ -1,0 +1,50 @@
+/*
+ * Inkpaper companion CSS, carried by the theme's custom_css.
+ * Holds what Gradio theme variables cannot express: motion timing,
+ * text selection, and keyboard-focus treatment.
+ *
+ * Palette: ink #111111, paper #eeeeee, slate #7288a7 (interactive).
+ */
+
+/* Text selection: slate wash, ink text. */
+::selection {
+  background-color: #7288a7;
+  color: #111111;
+}
+
+/*
+ * Motion: interactive color changes ease in at 200ms and ease back
+ * out at 300ms. The resting rule sets the slow exit; hover and focus
+ * shorten the duration for the entrance.
+ */
+button,
+a,
+input,
+textarea,
+select,
+label {
+  transition-property: color, background-color, border-color,
+    text-decoration-color;
+  transition-duration: 300ms;
+  transition-timing-function: ease;
+}
+
+button:hover,
+a:hover,
+input:hover,
+textarea:hover,
+select:hover,
+label:hover,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  transition-duration: 200ms;
+}
+
+/* Keyboard focus: a 1px slate outline held 3px off the element. */
+*:focus-visible {
+  outline: 1px solid #7288a7 !important;
+  outline-offset: 3px;
+}
