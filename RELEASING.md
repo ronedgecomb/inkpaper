@@ -4,7 +4,7 @@ Releases are built and published by `.github/workflows/release.yml`. The workflo
 
 ## One-time external activation
 
-Complete these steps only after the publication-ready repository is reviewed:
+These steps were completed for the 0.1.0 release and are retained for reference. They apply only to a fresh repository setup:
 
 1. Create the public GitHub repository `ronedgecomb/inkpaper` and push `main`.
 2. Protect `main`: require the CI checks, require pull requests, and block force-pushes and branch deletion. Configure the rule so the single maintainer can still merge reviewed, passing work.
@@ -15,23 +15,25 @@ Complete these steps only after the publication-ready repository is reviewed:
 
 Do not add a PyPI API token to GitHub.
 
-## Prepare version 0.1.0
+## Prepare the release
 
-The repository already declares 0.1.0. Confirm it and update the changelog entry from `Unreleased` to the release date:
+Bump the version (patch by default; choose minor or major when the changes call for it), move the `Unreleased` changelog entries under a dated heading for the new version, and update the README's pinned git-install tag to match. The docs test derives the expected tag from `pyproject.toml`, so a version bump without the README update fails CI.
 
-```powershell
-uv version --short
+PowerShell or bash:
+
+```text
+uv version --bump patch
 uv lock
 uv lock --check
 ```
 
-Expected version output: `0.1.0`.
-
-For later patch releases, run `uv version --bump patch`, then update `CHANGELOG.md` and commit both `pyproject.toml` and `uv.lock`.
+Commit `pyproject.toml`, `uv.lock`, `CHANGELOG.md`, and `README.md` together.
 
 ## Automated local gates
 
-```powershell
+Run in either PowerShell or bash:
+
+```text
 uv sync --locked
 uv run ruff check .
 uv run ruff format --check .
@@ -40,7 +42,9 @@ uv run --isolated --with "gradio==6.20.0" --upgrade-package gradio pytest -q
 uv run --isolated --with "gradio>=6.20,<7" --upgrade-package gradio pytest -q
 ```
 
-Build into a unique temporary directory and validate both distributions:
+Build into a unique temporary directory and validate both distributions.
+
+PowerShell:
 
 ```powershell
 $artifactDir = Join-Path ([System.IO.Path]::GetTempPath()) ("inkpaper-release-" + [guid]::NewGuid().ToString("N"))
@@ -53,6 +57,19 @@ uv run twine check $wheel $sdist
 uv run check-wheel-contents $wheel
 uv run --no-project --isolated --with $wheel python -I scripts/smoke_install.py $releaseVersion
 uv run --no-project --isolated --with $sdist python -I scripts/smoke_install.py $releaseVersion
+uv run python scripts/check_release.py "v$releaseVersion"
+```
+
+bash:
+
+```bash
+artifactDir="$(mktemp -d)"
+uv build --out-dir "$artifactDir"
+releaseVersion="$(uv version --short)"
+uv run twine check "$artifactDir"/*.whl "$artifactDir"/*.tar.gz
+uv run check-wheel-contents "$artifactDir"/*.whl
+uv run --no-project --isolated --with "$artifactDir"/*.whl python -I scripts/smoke_install.py "$releaseVersion"
+uv run --no-project --isolated --with "$artifactDir"/*.tar.gz python -I scripts/smoke_install.py "$releaseVersion"
 uv run python scripts/check_release.py "v$releaseVersion"
 ```
 
@@ -73,7 +90,9 @@ Prepare a non-empty summary of the result for the release notes. The publish com
 
 ## Publish
 
-Merge the reviewed version and changelog changes through protected `main`. Then create the release from the exact `main` commit:
+Merge the reviewed version, changelog, and README changes through protected `main`. Then create the release from the exact `main` commit.
+
+PowerShell:
 
 ```powershell
 $releaseVersion = uv version --short
@@ -84,6 +103,18 @@ if ([string]::IsNullOrWhiteSpace($visualGateSummary)) {
 gh release create "v$releaseVersion" --target main --title "inkpaper $releaseVersion" --notes $visualGateSummary --generate-notes
 ```
 
+bash:
+
+```bash
+releaseVersion="$(uv version --short)"
+read -p "Summarize the completed manual visual gate: " visualGateSummary
+if [ -z "${visualGateSummary//[[:space:]]/}" ]; then
+    echo "A manual visual-gate summary is required." >&2
+    exit 1
+fi
+gh release create "v$releaseVersion" --target main --title "inkpaper $releaseVersion" --notes "$visualGateSummary" --generate-notes
+```
+
 `--notes` prepends the manual visual-gate summary to the generated release notes. Publishing the GitHub Release triggers CI again. The release tag must equal `v` plus the project version. The workflow builds once, validates and hashes the artifacts, waits for approval on the `pypi` environment, publishes those exact files, and uploads attestations.
 
 ## Verify publication
@@ -91,10 +122,19 @@ gh release create "v$releaseVersion" --target main --title "inkpaper $releaseVer
 1. Confirm the GitHub workflow succeeded and the `pypi` environment approval is recorded.
 2. Confirm PyPI lists one wheel and one source distribution with provenance.
 3. Compare PyPI SHA-256 values with the workflow's `SHA256SUMS` artifact.
-4. Run a clean install:
+4. Run a clean install.
+
+PowerShell:
 
 ```powershell
 $releaseVersion = uv version --short
+uv run --no-project --isolated --with "inkpaper==$releaseVersion" python -c "import inkpaper; print(inkpaper.__version__, type(inkpaper.THEME).__name__, bool(inkpaper.CSS.strip()))"
+```
+
+bash:
+
+```bash
+releaseVersion="$(uv version --short)"
 uv run --no-project --isolated --with "inkpaper==$releaseVersion" python -c "import inkpaper; print(inkpaper.__version__, type(inkpaper.THEME).__name__, bool(inkpaper.CSS.strip()))"
 ```
 
