@@ -7,6 +7,7 @@ All notable changes to Inkpaper are documented here.
 ### Added
 
 - `py.typed` marker (PEP 561) and the `Typing :: Typed` classifier, so downstream type checkers use the shipped annotations.
+- Root `AGENTS.md` with the agent-facing workflow, quality gates, and project constraints.
 
 ### Changed
 
