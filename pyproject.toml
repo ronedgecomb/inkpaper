@@ -5,7 +5,7 @@ description = "An always-dark Gradio theme with monospace type, ink-black surfac
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 authors = [
     { name = "Ron Edgecomb" },
 ]
@@ -15,8 +15,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
@@ -38,7 +36,6 @@ dev = [
     "pytest>=8",
     "pyyaml>=6,<7",
     "ruff>=0.15.22",
-    "tomli>=2,<3; python_version < '3.11'",
     "twine>=6,<7",
 ]
 
