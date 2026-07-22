@@ -18,7 +18,7 @@ pip install inkpaper
 Or pin a GitHub release tag:
 
 ```text
-inkpaper @ git+https://github.com/ronedgecomb/inkpaper.git@v0.1.0
+inkpaper @ git+https://github.com/ronedgecomb/inkpaper.git@v0.1.1
 ```
 
 For local development, clone this repository and run `uv sync`.

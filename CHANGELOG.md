@@ -8,6 +8,10 @@ All notable changes to Inkpaper are documented here.
 
 - `py.typed` marker (PEP 561) and the `Typing :: Typed` classifier, so downstream type checkers use the shipped annotations.
 
+### Changed
+
+- The README git-install example pins the current release tag, and the docs test derives the expected tag from `pyproject.toml`, so a stale pin fails CI.
+
 ## [0.1.1] - 2026-07-21
 
 ### Changed

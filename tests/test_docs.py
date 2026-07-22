@@ -1,6 +1,12 @@
 """Public release documentation is complete and internally consistent."""
 
+import sys
 from pathlib import Path
+
+if sys.version_info >= (3, 11):
+    import tomllib
+else:
+    import tomli as tomllib
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -9,10 +15,16 @@ def _read(name: str) -> str:
     return (ROOT / name).read_text(encoding="utf-8")
 
 
+def _version() -> str:
+    with (ROOT / "pyproject.toml").open("rb") as pyproject:
+        return tomllib.load(pyproject)["project"]["version"]
+
+
 def test_readme_has_real_install_and_compatibility_details() -> None:
     readme = _read("README.md")
     assert "pip install inkpaper" in readme
-    assert "https://github.com/ronedgecomb/inkpaper.git@v0.1.0" in readme
+    tag_url = f"https://github.com/ronedgecomb/inkpaper.git@v{_version()}"
+    assert tag_url in readme
     retired_url_marker = chr(60) + "public-" + "repo-url" + chr(62)
     assert retired_url_marker not in readme
     assert "python_version" not in readme
