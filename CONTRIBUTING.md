@@ -1,6 +1,6 @@
 # Contributing
 
-Inkpaper supports Python 3.10 or newer. Development uses [uv](https://docs.astral.sh/uv/) with a locked environment on Python 3.14. Fork and clone the repository, then prepare the locked development environment:
+Inkpaper supports Python 3.12 or newer. Development uses [uv](https://docs.astral.sh/uv/) with a locked environment on Python 3.14. Fork and clone the repository, then prepare the locked development environment:
 
 ```bash
 uv sync
