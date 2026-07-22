@@ -108,3 +108,9 @@ def test_local_credentials_are_ignored() -> None:
     assert ".pypirc" in ignore
     assert "*.pem" in ignore
     assert "*.key" in ignore
+
+
+def test_release_guide_covers_both_shells() -> None:
+    releasing = _read("RELEASING.md")
+    assert "```powershell" in releasing
+    assert "```bash" in releasing
