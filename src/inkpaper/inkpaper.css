@@ -120,3 +120,16 @@ select:focus-visible:focus-visible:focus-visible:focus-visible {
   outline: 1px solid #7288a7 !important;
   outline-offset: 3px;
 }
+
+/*
+ * Footer links (Use via API, Built with Gradio, Settings, and the API
+ * recorder): Gradio wires their hover straight to --body-text-color,
+ * bypassing the link tokens, so they would brighten to paper instead
+ * of easing to slate. Element scope plus the stacked :hover
+ * out-specifies Gradio's .built-with.svelte-<hash>:hover rules
+ * without depending on the hash. Resting color and the absence of
+ * underlines are Gradio's own and stay untouched.
+ */
+footer :is(.show-api, .built-with, .settings, .record):hover:hover {
+  color: #7288a7;
+}

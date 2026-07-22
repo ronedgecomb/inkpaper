@@ -15,3 +15,7 @@ def test_css_contains_sentinel_rules() -> None:
 def test_theme_carries_the_css() -> None:
     assert Inkpaper().custom_css == CSS
     assert CSS.strip(), "CSS must not be empty"
+
+
+def test_css_overrides_footer_link_hover() -> None:
+    assert "footer :is(.show-api, .built-with, .settings, .record):hover:hover" in CSS
