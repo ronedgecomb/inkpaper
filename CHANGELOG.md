@@ -13,6 +13,11 @@ All notable changes to Inkpaper are documented here.
 
 - The README git-install example pins the current release tag, and the docs test derives the expected tag from `pyproject.toml`, so a stale pin fails CI.
 - RELEASING.md is version-generic instead of written for 0.1.0, and every PowerShell command now has a bash equivalent.
+- Raised the minimum supported Python from 3.10 to 3.12, matching the Hugging Face Spaces floor, and dropped the `tomli` backport from the dev dependencies.
+
+### Fixed
+
+- Footer links (Use via API, Built with Gradio, Settings, and the API recorder) now ease to slate on hover instead of brightening to paper, matching the rest of the theme's links.
 
 ## [0.1.1] - 2026-07-21
 

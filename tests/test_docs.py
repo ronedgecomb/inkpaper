@@ -1,12 +1,7 @@
 """Public release documentation is complete and internally consistent."""
 
-import sys
+import tomllib
 from pathlib import Path
-
-if sys.version_info >= (3, 11):
-    import tomllib
-else:
-    import tomli as tomllib
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -28,7 +23,7 @@ def test_readme_has_real_install_and_compatibility_details() -> None:
     retired_url_marker = chr(60) + "public-" + "repo-url" + chr(62)
     assert retired_url_marker not in readme
     assert "python_version" not in readme
-    assert "Python 3.10 or newer" in readme
+    assert "Python 3.12 or newer" in readme
     assert "Gradio 6.20 through 6.x" in readme
     assert "uv run ruff check ." in readme
     assert "uv run ruff format --check ." in readme

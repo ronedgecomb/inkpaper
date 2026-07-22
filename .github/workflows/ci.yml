@@ -46,16 +46,16 @@ jobs:
         run: uv run --locked pytest -q
 
   compatibility:
-    name: Gradio ${{ matrix.name }} on Python ${{ matrix.python }}
+    name: Gradio ${{ matrix.name }} compatibility
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: minimum-6.20.0
+          - name: floor
             gradio: gradio==6.20.0
-            python: "3.10"
-          - name: newest-6.x
+            python: "3.12"
+          - name: ceiling
             gradio: gradio>=6.20,<7
             python: "3.14"
     steps:
