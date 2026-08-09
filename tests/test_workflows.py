@@ -56,7 +56,7 @@ def test_release_is_top_level_oidc_publish_only() -> None:
 def test_release_uses_the_reviewed_pypi_publish_commit() -> None:
     release = _read(RELEASE)
     assert (
-        "pypa/gh-action-pypi-publish@ba38be9e461d3875417946c167d0b5f3d385a247 # v1.14.1"
+        "pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2"
     ) in release
 
 
